@@ -1,0 +1,28 @@
+{
+  "name": "drone-mvn-settings",
+  "version": "1.0.0",
+  "description": "A simple drone plugin that can generate a settings.xml file",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.sytm.de/Sytm/drone-mvn-settings.git"
+  },
+  "keywords": [
+    "drone",
+    "docker",
+    "plugin"
+  ],
+  "author": "Lukas Planz",
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "mocha": "^7.0.1"
+  },
+  "dependencies": {
+    "drone-env-parser": "^1.1.1",
+    "squirrelly": "^7.9.1"
+  }
+}

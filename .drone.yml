@@ -1,0 +1,21 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: node:alpine
+    commands:
+      - npm ci
+      - npm test
+  - name: publish
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: md5lukas/drone-mvn-settings
+      tags: latest
+    when:
+      event:
+        - tag
