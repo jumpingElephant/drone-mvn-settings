@@ -132,8 +132,8 @@ Settings that are not directly connected to the content of the settings.xml:
 
 ## TODO:
 
-Add support for:
  - [ ] Profiles
  - [ ] Proxies
+ - [ ] Custom template path
 
 [My reference for the content of the settings.xml](https://maven.apache.org/settings.html)
