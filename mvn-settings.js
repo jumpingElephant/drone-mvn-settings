@@ -10,6 +10,10 @@ const minify1 = /\s{2,}|($(\r|\n))/gm;
 const minify2 = />\s</gm;
 
 function generateSettings() {
+    if ( process.env[ 'UNIT_TEST' ] !== 'true' ) {
+        console.log( 'Creating settings.xml file...' );
+    }
+
     let settings = require( 'drone-env-parser' ).parseEnvs();
 
     if ( settings.serversecrets ) {
@@ -21,8 +25,9 @@ function generateSettings() {
 
     let settingsTemplate = fs.readFileSync( path.join( __dirname, 'template', 'settings.xml' ), 'utf8' );
     let settingsFile = Sqrl.Render( settingsTemplate, settings );
-    if ( settings.minify !== false )
+    if ( settings.minify === true ) {
         settingsFile = minify( settingsFile );
+    }
 
     let outputPath = 'settings.xml';
     if ( settings.custompath ) {
@@ -30,6 +35,9 @@ function generateSettings() {
     }
 
     fs.writeFileSync( outputPath, settingsFile );
+    if ( process.env[ 'UNIT_TEST' ] !== 'true' ) {
+        console.log( 'The settings.xml file has been created' );
+    }
 }
 
 function minify( str ) {

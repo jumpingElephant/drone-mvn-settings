@@ -17,7 +17,7 @@ steps:
       repo: md5lukas/drone-mvn-settings
       tags: 
         - latest
-        - 0.2.0
+        - 0.3.0
     when:
       event:
         - tag

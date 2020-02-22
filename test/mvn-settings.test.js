@@ -130,6 +130,7 @@ describe( 'mvn-settings.js', function () {
     describe( '#generateSettings()', function () {
         it( 'should create an empty settings file', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath
             }, { clear: true } );
@@ -143,6 +144,7 @@ describe( 'mvn-settings.js', function () {
         } );
         it( 'should add the local repository declaration', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_LOCALREPOSITORY: 'https://example.org/'
@@ -157,6 +159,7 @@ describe( 'mvn-settings.js', function () {
         } );
         it( 'should add the server declarations', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_SERVERS: JSON.stringify( [
@@ -183,6 +186,7 @@ describe( 'mvn-settings.js', function () {
         } );
         it( 'should merge the server secret variable into the server declarations', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_SERVERS: JSON.stringify( [
@@ -217,6 +221,7 @@ describe( 'mvn-settings.js', function () {
         } );
         it( 'should add the mirror declarations', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_MIRRORS: JSON.stringify( [
@@ -239,6 +244,7 @@ describe( 'mvn-settings.js', function () {
         } );
         it( 'should merge the mirror secret variable into the mirror declarations', function () {
             let restore = mockedEnv( {
+                UNIT_TEST: 'true',
                 PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_MIRRORS: JSON.stringify( [
