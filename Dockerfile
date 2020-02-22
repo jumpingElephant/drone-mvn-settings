@@ -8,4 +8,4 @@ ENV NODE_ENV production
 
 RUN npm ci
 
-ENTRYPOINT [ "node", "/plugins/index.js" ]
+ENTRYPOINT [ "node", "/plugin/index.js" ]
