@@ -22,9 +22,6 @@ function generateSettings() {
 
     let settingsTemplate = fs.readFileSync( path.join( __dirname, 'template', 'settings.xml' ), 'utf8' );
     let settingsFile = Sqrl.Render( settingsTemplate, settings );
-    if ( settings.minify === true ) {
-        settingsFile = minify( settingsFile );
-    }
 
     let outputPath = 'settings.xml';
     if ( settings.custompath ) {
