@@ -1,3 +1,3 @@
-'use strict';
+"use strict";
 
-require('./mvn-settings').generateSettings();
+require("./mvn-settings").generateSettings();
