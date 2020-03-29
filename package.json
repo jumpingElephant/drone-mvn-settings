@@ -4,6 +4,8 @@
   "description": "A simple drone plugin that can generate a settings.xml file",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
+    "prettier": "prettier --check .",
     "test": "mocha"
   },
   "repository": {
@@ -38,6 +40,6 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,css,md,yml}": "prettier --write"
   }
 }

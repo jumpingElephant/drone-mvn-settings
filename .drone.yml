@@ -4,8 +4,12 @@ name: default
 steps:
   - name: test
     image: node:12-alpine
+    environment:
+      NODE_ENV: development
     commands:
       - npm ci
+      - npm run lint
+      - npm run prettier
       - npm test
   - name: publish
     image: plugins/docker
@@ -15,9 +19,7 @@ steps:
       password:
         from_secret: docker_password
       repo: md5lukas/drone-mvn-settings
-      tags:
-        - latest
-        - ${DRONE_SEMVER}
+      auto_tag: true
     when:
       event:
         - tag
