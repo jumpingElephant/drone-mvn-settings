@@ -4,9 +4,16 @@ const fs = require( 'fs' );
 const assert = require( 'assert' );
 const mockedEnv = require( 'mocked-env' );
 
-const { minify, extendArray, generateSettings } = require( '../mvn-settings' );
+const { extendArray, generateSettings } = require( '../mvn-settings' );
 
 let settingsPath = path.join( __dirname, 'settings.xml' );
+
+const minify1 = /\s{2,}|($(\r|\n))/gm;
+const minify2 = />\s</gm;
+
+function minify( str ) {
+    return str.replace( minify1, ' ' ).replace( minify2, '><' );
+}
 
 function getSettingsXML( content ) {
     return '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">' + content + '</settings>';
@@ -14,9 +21,9 @@ function getSettingsXML( content ) {
 
 function readSettingsFile( custompath ) {
     if ( custompath === undefined ) {
-        return fs.readFileSync( settingsPath, 'utf8' );
+        return minify(fs.readFileSync( settingsPath, 'utf8' ));
     } else {
-        return fs.readFileSync( custompath, 'utf8' );
+        return minify(fs.readFileSync( custompath, 'utf8' ));
     }
 }
 
@@ -32,13 +39,16 @@ function deleteSettingsFile( custompath ) {
     }
 }
 
-describe( 'mvn-settings.js', function () {
+describe( 'test/mvn-settings.txt.js', function () {
     describe( '#minify()', function () {
         it( 'should minify the settings.xml properly', function () {
             let Sqrl = require( 'squirrelly' );
             assert.strictEqual( minify( Sqrl.Render( fs.readFileSync( path.join( __dirname, '..', 'template', 'settings.xml' ), 'utf8' ), {} ) ), getSettingsXML( '' ) );
         } );
     } );
+} );
+
+describe( 'mvn-settings.js', function () {
     describe( '#extendArray()', function () {
         it( 'should use the source array if the target is not defined', function () {
             let source = [
@@ -131,7 +141,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should create an empty settings file', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath
             }, { clear: true } );
             try {
@@ -145,7 +154,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should add the local repository declaration', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_LOCALREPOSITORY: 'https://example.org/'
             }, { clear: true } );
@@ -160,7 +168,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should add the server declarations', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_SERVERS: JSON.stringify( [
                     {
@@ -187,7 +194,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should merge the server secret variable into the server declarations', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_SERVERS: JSON.stringify( [
                     {
@@ -222,7 +228,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should add the mirror declarations', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_MIRRORS: JSON.stringify( [
                     {
@@ -245,7 +250,6 @@ describe( 'mvn-settings.js', function () {
         it( 'should merge the mirror secret variable into the mirror declarations', function () {
             let restore = mockedEnv( {
                 UNIT_TEST: 'true',
-                PLUGIN_MINIFY: 'true',
                 PLUGIN_CUSTOMPATH: settingsPath,
                 PLUGIN_MIRRORS: JSON.stringify( [
                     {

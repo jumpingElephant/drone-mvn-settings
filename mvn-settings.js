@@ -6,9 +6,6 @@ const extend = require( 'extend' );
 
 Sqrl.autoEscaping( false );
 
-const minify1 = /\s{2,}|($(\r|\n))/gm;
-const minify2 = />\s</gm;
-
 function generateSettings() {
     if ( process.env[ 'UNIT_TEST' ] !== 'true' ) {
         console.log( 'Creating settings.xml file...' );
@@ -40,10 +37,6 @@ function generateSettings() {
     }
 }
 
-function minify( str ) {
-    return str.replace( minify1, ' ' ).replace( minify2, '><' );
-}
-
 function extendArray( uniqueKey, targetArray, sourceArray ) {
     if ( targetArray === undefined ) {
         return sourceArray;
@@ -61,6 +54,5 @@ function extendArray( uniqueKey, targetArray, sourceArray ) {
 
 module.exports = {
     generateSettings,
-    minify,
     extendArray
 }

@@ -128,7 +128,6 @@ Additional to servers and mirrors the following values can be set for the settin
 
 Settings that are not directly connected to the content of the settings.xml:
  - `customPath` (default: not set, will store in current working directory) Sets the directory and filename of the settings.xml file that will be generated
- - `minify` (default: false) Strips the settings.xml from every linebreak and 2 or more consecutive whitespace (this also affects values that are entered in the .drone.yml) primary usage is for testing
 
 ## TODO:
 
