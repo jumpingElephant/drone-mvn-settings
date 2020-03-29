@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: node:alpine
+  image: node:12-alpine
   commands:
   - npm ci
   - npm test
