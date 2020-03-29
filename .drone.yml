@@ -2,22 +2,27 @@ kind: pipeline
 name: default
 
 steps:
-  - name: test
-    image: node:alpine
-    commands:
-      - npm ci
-      - npm test
-  - name: publish
-    image: plugins/docker
-    settings:
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      repo: md5lukas/drone-mvn-settings
-      tags: 
-        - latest
-        - ${DRONE_SEMVER}
-    when:
-      event:
-        - tag
+- name: test
+  image: node:alpine
+  commands:
+  - npm ci
+  - npm test
+- name: publish
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: md5lukas/drone-mvn-settings
+    tags: 
+    - latest
+    - ${DRONE_SEMVER}
+  when:
+    event:
+    - tag
+
+trigger:
+  branch:
+    exclude:
+    - dependabot/**
