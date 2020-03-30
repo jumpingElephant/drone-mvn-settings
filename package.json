@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "prettier": "prettier --check .",
-    "test": "c8 -r lcov --all mocha"
+    "test": "c8 -r lcovonly --all mocha"
   },
   "repository": {
     "type": "git",

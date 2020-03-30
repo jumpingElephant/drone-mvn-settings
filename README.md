@@ -1,4 +1,4 @@
-# drone-mvn-settings [![Build Status](https://drone.sytm.de/api/badges/Sytm/drone-mvn-settings/status.svg)](https://drone.sytm.de/Sytm/drone-mvn-settings)
+# drone-mvn-settings [![Build Status](https://drone.sytm.de/api/badges/Sytm/drone-mvn-settings/status.svg)](https://drone.sytm.de/Sytm/drone-mvn-settings) [![Coverage Status](https://coveralls.io/repos/github/Sytm/drone-mvn-settings/badge.svg?branch=master)](https://coveralls.io/github/Sytm/drone-mvn-settings?branch=master)
 
 This plugin provides a simple way to create a settings.xml file for your maven pipelines
 
