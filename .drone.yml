@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 steps:
-  - name: test
+  - name: lint
     image: node:12-alpine
     environment:
       NODE_ENV: development
@@ -10,7 +10,19 @@ steps:
       - npm ci
       - npm run lint
       - npm run prettier
+  - name: test
+    image: node:12-alpine
+    environment:
+      NODE_ENV: development
+    commands:
       - npm test
+  - name: upload coverage
+    image: md5lukas/drone-coveralls
+    settings:
+      token:
+        from_secret: coveralls_token
+      files:
+        - ./coverage/lcov.info
   - name: publish
     image: plugins/docker
     settings:

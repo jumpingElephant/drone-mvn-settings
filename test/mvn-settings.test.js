@@ -51,7 +51,7 @@ function deleteSettingsFile(custompath) {
   }
 }
 
-describe("test/mvn-settings.txt.js", function () {
+describe("test/mvn-settings.test.js", function () {
   describe("#minify()", function () {
     it("should minify the settings.xml properly", function () {
       let Sqrl = require("squirrelly");
@@ -68,6 +68,21 @@ describe("test/mvn-settings.txt.js", function () {
         getSettingsXML("")
       );
     });
+  });
+});
+
+describe("index.js", function () {
+  it("should create an empty settings file", function () {
+    let restore = mockedEnv({
+      UNIT_TEST: "true",
+      PLUGIN_CUSTOMPATH: settingsPath,
+    });
+    try {
+      require("../index");
+      assert.strictEqual(readSettingsFile(), getSettingsXML(""));
+    } finally {
+      restore();
+    }
   });
 });
 
@@ -174,6 +189,29 @@ describe("mvn-settings.js", function () {
         assert.strictEqual(readSettingsFile(), getSettingsXML(""));
       } finally {
         restore();
+        deleteSettingsFile();
+      }
+    });
+    it("should output something to the console", function () {
+      let restore = mockedEnv(
+        {
+          PLUGIN_CUSTOMPATH: settingsPath,
+        },
+        { clear: true }
+      );
+      let originalLog = console.log;
+      let consoleOutput = [];
+      console.log = (str) => consoleOutput.push(str);
+      try {
+        generateSettings();
+        assert.strictEqual(readSettingsFile(), getSettingsXML(""));
+        assert.deepEqual(consoleOutput, [
+          "Creating settings.xml file...",
+          "The settings.xml file has been created",
+        ]);
+      } finally {
+        restore();
+        console.log = originalLog;
         deleteSettingsFile();
       }
     });
