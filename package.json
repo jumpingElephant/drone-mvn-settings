@@ -27,7 +27,7 @@
     "lint-staged": "^10.1.7",
     "mocha": "^7.1.1",
     "mocked-env": "^1.3.2",
-    "prettier": "2.0.4"
+    "prettier": "2.0.5"
   },
   "dependencies": {
     "drone-env-parser": "^1.2.0",
