@@ -19,6 +19,7 @@ jobs:
       id: cache
     - uses: actions/cache@v1
       with:
+        path: ${{ github.workspace }}/node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     - run: npm ci
       if: steps.cache.outputs.cache-hit != 'true'
