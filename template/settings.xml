@@ -11,6 +11,13 @@
             {{@foreach(server) => key, val}}
             <{{key}}>{{val}}</{{key}}>
             {{/foreach}}
+            <configuration>
+                <httpConfiguration>
+                    <all>
+                        <usePreemptive>true</usePreemptive>
+                    </all>
+                </httpConfiguration>
+            </configuration>
         </server>
         {{/each}}
     </servers>
